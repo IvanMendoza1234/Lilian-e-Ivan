@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para mi Lilian ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa: #ffafcc;
+            --azul: #a2d2ff;
+            --rosa-fuerte: #ff4d6d;
+            --azul-oscuro: #5fa8d3;
+            --dorado: #ffb703;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, #f8edeb 0%, var(--rosa) 50%, var(--azul) 100%);
+            color: #444; margin: 0; padding: 0;
+            overflow-x: hidden; width: 100%;
+        }
+
+        /* --- Elementos Flotantes (Sushi y Corazones) --- */
+        .decoracion {
+            position: fixed; top: -50px; font-size: 24px;
+            z-index: 1; pointer-events: none;
+            animation: caer linear infinite;
+        }
+        @keyframes caer {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* --- Pantalla de Inicio --- */
+        #seccion-preguntas {
+            position: fixed; inset: 0; background: white;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999; text-align: center; padding: 15px;
+        }
+        .gif-gatito { width: 80%; max-width: 250px; border-radius: 20px; margin-bottom: 20px; border: 5px solid var(--rosa); }
+        
+        .contenedor-botones-inicio {
+            display: flex; gap: 15px; justify-content: center; align-items: center;
+            min-height: 200px; width: 100%; position: relative;
+        }
+
+        .btn {
+            padding: 12px 25px; border: none; border-radius: 50px;
+            font-weight: bold; cursor: pointer; transition: all 0.3s; font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            -webkit-tap-highlight-color: transparent;
+        }
+        #btn-si { background: var(--rosa-fuerte); color: white; z-index: 10000; }
+        #btn-no { background: #adb5bd; color: white; z-index: 10001; }
+
+        /* --- Contenido Principal --- */
+        #contenido { display: none; position: relative; z-index: 2; padding: 10px; text-align: center; }
+        
+        .corazon-header { margin: 30px 0; display: flex; flex-direction: column; align-items: center; }
+        .marco-corazon {
+            width: 90vw; height: 80vw; max-width: 350px; max-height: 320px;
+            background: white; 
+            clip-path: path('M175,290 C175,290 20,205 20,110 C20,50 70,20 120,20 C150,20 175,45 175,45 C175,45 200,20 230,20 C280,20 330,50 330,110 C330,205 175,290 175,290 Z');
+            display: flex; padding: 5px; box-sizing: border-box;
+            filter: drop-shadow(0 10px 15px rgba(255, 77, 109, 0.4));
+        }
+        .foto-mitad { width: 50%; height: 100%; overflow: hidden; }
+        .foto-mitad img { width: 100%; height: 100%; object-fit: cover; }
+
+        .texto-romantico { 
+            font-family: 'Dancing Script', cursive; font-size: 2.5rem; 
+            color: #ff4d6d; margin: 15px 0; text-shadow: 2px 2px 0px white;
+        }
+
+        .tarjeta-mensaje {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px; border-radius: 25px; margin: 15px;
+            border-left: 8px solid var(--rosa-fuerte);
+            border-right: 8px solid var(--azul-oscuro);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* --- El Libro --- */
+        .seccion-libro { margin: 20px auto; width: 95%; max-width: 500px; display: none; }
+        .libro {
+            background: #fffdf5 url('https://www.transparenttextures.com/patterns/paper.png');
+            padding: 30px 20px; border-radius: 10px;
+            border-left: 12px solid #5a3e2b;
+            box-shadow: 15px 15px 40px rgba(0,0,0,0.3);
+            min-height: 480px; position: relative;
+        }
+        .pagina { display: none; animation: fadeIn 0.5s; }
+        .pagina.activa { display: block; }
+        .lista-amor { font-size: 0.95rem; list-style: none; padding: 0; }
+        .lista-amor li { margin-bottom: 10px; padding-left: 25px; position: relative; }
+        .lista-amor li::before { content: "🍣"; position: absolute; left: 0; font-size: 0.8rem; }
+
+        /* --- Carrusel --- */
+        .carrusel-contenedor { 
+            width: 95%; max-width: 600px; margin: 30px auto; 
+            border: 10px solid white; border-radius: 20px; 
+            overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        .slider { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .slider img { width: 100%; flex-shrink: 0; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .footer-final {
+            background: white; padding: 30px; border-radius: 30px 30px 0 0;
+            margin-top: 50px; border-top: 5px solid var(--rosa-fuerte);
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="musica" loop preload="auto">
+        <source src="naci_para_amarte.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- PANTALLA DE INICIO -->
+    <div id="seccion-preguntas">
+        <img src="gato1.jpg" id="img-gato" class="gif-gatito">
+        <h2 id="texto-pregunta" style="color: var(--rosa-fuerte); font-family: 'Dancing Script'; font-size: 2rem;">¿Me amas mucho, mucho? 🥺</h2>
+        <div class="contenedor-botones-inicio">
+            <button class="btn" id="btn-si" onclick="amorConfirmado()">¡SÍ! ❤️</button>
+            <button class="btn" id="btn-no" onclick="saltarBotonNo()">No 😶</button>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div id="contenido">
+        <!-- Decoraciones que caerán -->
+        <div id="lluvia-decoracion"></div>
+
+        <div class="corazon-header">
+            <div class="marco-corazon">
+                <div class="foto-mitad"><img src="yo.jpeg"></div>
+                <div class="foto-mitad"><img src="ella.jpeg"></div>
+            </div>
+            <h1 class="texto-romantico">Lilian & Ivan</h1>
+            <p style="font-size: 1.2rem; color: #666;">✨ 1 Mes de Casaditos ✨</p>
+        </div>
+
+        <div class="tarjeta-mensaje">
+            <p style="font-size: 1.1rem; line-height: 1.6;">
+                "Déjame ser tu <strong>Meliodas</strong> y siempre ir a buscarte... aunque pierdas la memoria, siempre volveré a enamorarte como la primera vez." ⚔️❤️
+            </p>
+        </div>
+
+        <button class="btn" style="background: var(--rosa-fuerte); color: white; width: 85%; font-size: 1.2rem; margin: 20px 0;" onclick="abrirLibro()">📖 Abrir nuestro libro de amor</button>
+
+        <!-- LIBRO DE RAZONES -->
+        <div id="miLibro" class="seccion-libro">
+            <div class="libro">
+                <!-- Pagina 1 -->
+                <div class="pagina activa">
+                    <h3 style="color: var(--rosa-fuerte); border-bottom: 2px solid var(--rosa);">Razones (1/5)</h3>
+                    <ul class="lista-amor">
+                        <li>Amo tus lindos ojos y tu carita</li>
+                        <li>Amo tu linda narizita y tu boquita</li>
+                        <li>Amo tus lindos labios y cachetitos lindos</li>
+                        <li>Amo tus orejitas y tu lindo cabello</li>
+                        <li>Amo el color de tus ojos</li>
+                        <li>Amo tu respiración</li>
+                        <li>Amo como cubres tu carita en las fotos</li>
+                    </ul>
+                    <button class="btn" style="background: var(--azul-oscuro); color: white; width: 100%; margin-top: 15px;" onclick="cambiarPagina(1, 2)">Siguiente 👉</button>
+                </div>
+                <!-- Pagina 2 -->
+                <div class="pagina">
+                    <h3 style="color: var(--rosa-fuerte); border-bottom: 2px solid var(--rosa);">Razones (2/5)</h3>
+                    <ul class="lista-amor">
+                        <li>Amo tu cuerpo, tus brazos, tus piernas y muslos</li>
+                        <li>Amo los deditos de tus pies y manos</li>
+                        <li>Amo tus lindas uñas y tus lindos codos</li>
+                        <li>Amo tu pancita y tu ombligo</li>
+                        <li>Amo tu espalda y tus claviculas</li>
+                        <li>Amo tus chichotas y tus pezones rositas 😼</li>
+                        <li>Amo tus nalgotas</li>
+                    </ul>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn" style="background: #ccc; flex:1;" onclick="cambiarPagina(2, 1)">Atrás</button>
+                        <button class="btn" style="background: var(--azul-oscuro); flex:1; color: white;" onclick="cambiarPagina(2, 3)">Sig.</button>
+                    </div>
+                </div>
+                <!-- Pagina 3 -->
+                <div class="pagina">
+                    <h3 style="color: var(--rosa-fuerte); border-bottom: 2px solid var(--rosa);">Razones (3/5)</h3>
+                    <ul class="lista-amor">
+                        <li>Amo la paciencia que tienes para aguantarme</li>
+                        <li>Amo que veas lo bueno en mi a pesar de todo</li>
+                        <li>Amo que te preocupes por lo que siento</li>
+                        <li>Amo que me muestres tus sentimientos</li>
+                        <li>Amo el tiempo que pasas jugando conmigo</li>
+                        <li>Amo cuando me escribes "ozi"</li>
+                        <li>Amo lo penosa que eres</li>
+                    </ul>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn" style="background: #ccc; flex:1;" onclick="cambiarPagina(3, 2)">Atrás</button>
+                        <button class="btn" style="background: var(--azul-oscuro); flex:1; color: white;" onclick="cambiarPagina(3, 4)">Sig.</button>
+                    </div>
+                </div>
+                <!-- Pagina 4 -->
+                <div class="pagina">
+                    <h3 style="color: var(--rosa-fuerte); border-bottom: 2px solid var(--rosa);">Razones (4/5)</h3>
+                    <ul class="lista-amor">
+                        <li>Amo cuando demuestras tu verdadera tú</li>
+                        <li>Amo cuando estás caliente y me demuestras tu amor</li>
+                        <li>Amo que nuestra relación nunca sea aburrida</li>
+                        <li>Amo que sigamos juntos tras las discusiones</li>
+                        <li>Amo que me expliques lo que hago mal</li>
+                        <li>Amo tu forma de ser y lo linda que te ves</li>
+                        <li>Amo tu voz y tus audios</li>
+                    </ul>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn" style="background: #ccc; flex:1;" onclick="cambiarPagina(4, 3)">Atrás</button>
+                        <button class="btn" style="background: var(--azul-oscuro); flex:1; color: white;" onclick="cambiarPagina(4, 5)">Sig.</button>
+                    </div>
+                </div>
+                <!-- Pagina 5 -->
+                <div class="pagina">
+                    <h3 style="color: var(--rosa-fuerte); border-bottom: 2px solid var(--rosa);">Razones (5/5)</h3>
+                    <ul class="lista-amor">
+                        <li>Amo que quieras casarte conmigo</li>
+                        <li>Amo haber elegido a la persona correcta</li>
+                        <li>Amo todo lo que tenga que ver contigo</li>
+                        <li>Amo hasta tus inseguridades</li>
+                        <li>Amo a Lilian.</li>
+                    </ul>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn" style="background: #ccc; flex:1;" onclick="cambiarPagina(5, 4)">Atrás</button>
+                        <button class="btn" style="background: var(--rosa-fuerte); flex:1; color: white;" onclick="cerrarLibro()">Cerrar ❤️</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="font-family: 'Dancing Script'; color: white; margin-top: 40px; font-size: 2rem;">Nuestros Momentos ✨</h2>
+        <div class="carrusel-contenedor">
+            <div class="slider" id="slider">
+                <script>
+                    for(let i=1; i<=31; i++) {
+                        document.write(`<img src="${i}.png" alt="Foto ${i}">`);
+                    }
+                </script>
+            </div>
+        </div>
+
+        <div class="footer-final">
+            <h2 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--rosa-fuerte); margin-bottom: 10px;">Feliz 1 mes de casados</h2>
+            <p style="color: #666;">Gracias por ser mi esposa, mi niña y mi todo.</p>
+            <p style="font-weight: bold; color: #444;">De tu novio y esposo Ivan, el terror de tus chichotas 😼</p>
+            <div style="font-size: 2rem; margin-top: 20px;">🍣 ❤️ ⚔️</div>
+        </div>
+    </div>
+
+    <script>
+        let paso = 0;
+        let escalaSi = 1;
+        const btnNo = document.getElementById('btn-no');
+        const gatoImg = document.getElementById('img-gato');
+        const frases = ["¿Segura? 😿", "¿Muy segura? 🤨", "Piénsalo bien... 😏", "¡No me hagas esto! 😱", "¡Ya dale al SÍ! ❤️"];
+        const gatitos = ["gato2.jpg", "gato3.jpg", "gato4.jpg", "gato5.jpg", "gato6.jpg"];
+
+        function saltarBotonNo() {
+            if (paso >= frases.length) { btnNo.style.display = 'none'; return; }
+            btnNo.style.position = "fixed";
+            const pad = 80;
+            const maxX = window.innerWidth - btnNo.offsetWidth - pad;
+            const maxY = window.innerHeight - btnNo.offsetHeight - pad;
+            btnNo.style.left = Math.max(10, Math.floor(Math.random() * maxX)) + "px";
+            btnNo.style.top = Math.max(10, Math.floor(Math.random() * maxY)) + "px";
+            document.getElementById('texto-pregunta').innerText = frases[paso];
+            gatoImg.src = gatitos[paso];
+            escalaSi += 0.25;
+            document.getElementById('btn-si').style.transform = `scale(${escalaSi})`;
+            paso++;
+        }
+
+        function amorConfirmado() {
+            document.getElementById('seccion-preguntas').style.display = 'none';
+            document.getElementById('contenido').style.display = 'block';
+            document.getElementById('musica').play().catch(() => {});
+            crearLluvia();
+            iniciarCarrusel();
+        }
+
+        // --- Sistema de Sushi y Corazones cayendo ---
+        function crearLluvia() {
+            const contenedor = document.getElementById('lluvia-decoracion');
+            const elementos = ['🍣', '❤️', '✨', '🍙', '💖'];
+            
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.className = 'decoracion';
+                el.innerText = elementos[Math.floor(Math.random() * elementos.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                el.style.opacity = Math.random();
+                contenedor.appendChild(el);
+                
+                setTimeout(() => el.remove(), 5000);
+            }, 300);
+        }
+
+        function cambiarPagina(a, d) {
+            const p = document.querySelectorAll('.pagina');
+            p[a-1].classList.remove('activa');
+            p[d-1].classList.add('activa');
+        }
+
+        function abrirLibro() { document.getElementById('miLibro').style.display = 'block'; }
+        function cerrarLibro() { document.getElementById('miLibro').style.display = 'none'; }
+
+        function iniciarCarrusel() {
+            let idx = 0;
+            setInterval(() => {
+                idx = (idx + 1) % 31;
+                document.getElementById('slider').style.transform = `translateX(-${idx * 100}%)`;
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
